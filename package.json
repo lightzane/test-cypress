@@ -1,0 +1,23 @@
+{
+    "name": "test-my-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "cy:open": "cypress open",
+        "cy:run": "cypress run",
+        "cy:install": "cypress install --force",
+        "cy:clear": "cypress cache clear",
+        "cy:verify": "cypress verify"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "cypress": "^7.5.0",
+        "cypress-cucumber-preprocessor": "^4.1.2"
+    },
+    "cypress-cucumber-preprocessor": {
+        "nonGlobalStepDefinitions": true
+    }
+}
