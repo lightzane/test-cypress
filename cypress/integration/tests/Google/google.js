@@ -6,8 +6,8 @@ Given('I open Google page', () => {
     cy.visit(url);
 });
 
-When(`I type {string} in the textfield`, () => {
-    cy.get('.gLFyf').type('IU').type('{enter}');
+When(`I type {string} in the textfield`, (keyword) => {
+    cy.get('.gLFyf').type(keyword).type('{enter}');
 });
 
 When('I click on image tab', () => {

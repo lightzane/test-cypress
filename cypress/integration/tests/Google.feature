@@ -7,5 +7,5 @@ Feature: Google Main Page
     Then I see "Google" on the title
 
   Scenario: Typing "IU" in the search field
-    When I type "IU" in the textfield
-    Then I see "IU" on the title
+    When I type "IU pretty" in the textfield
+    Then I see "IU pretty" on the title
