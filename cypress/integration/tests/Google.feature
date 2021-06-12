@@ -9,3 +9,6 @@ Feature: Google Main Page
   Scenario: Typing "IU" in the search field
     When I type "IU pretty" in the textfield
     Then I see "IU pretty" on the title
+
+  Scenario: Pokemon and REST API
+    When I want to search "Bulbasaur" via rest-api testing

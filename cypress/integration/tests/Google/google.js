@@ -29,3 +29,21 @@ When(`I type {string} in the textfield`, (keyword) => {
     cy.get('.GmE3X').as('labelImageResult'); // the DOM element has now an alias of 'labelImageResult'
     cy.get('@labelImageResult').should('have.text', `Images for ${keyword}`);
 });
+
+// Suddenly a pokemon appeared !
+When('I want to search {string} via rest-api testing', (pokemon) => {
+    cy.log(`Search for ${pokemon}`);
+    cy.request(
+        'GET',
+        `https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`
+    ).then((response) => {
+        expect(response.status).eq(200);
+        expect(response.body.name).eq(pokemon.toLowerCase());
+
+        // list pokemon type
+        let types = response.body.types;
+        types.forEach((value, index, array) => {
+            cy.log(value.type.name);
+        });
+    });
+});
