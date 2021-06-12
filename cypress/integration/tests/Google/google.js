@@ -1,6 +1,4 @@
-/// <reference types="Cypress" />
-
-import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, When } from 'cypress-cucumber-preprocessor/steps';
 
 const url = 'https://google.com';
 

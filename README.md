@@ -28,7 +28,7 @@ npm install -D cypress
 5. `npm run cy:install`
 6. `npm run cy:verify`
 7. There should be verified cypress.exe
-8. Install cucumber (https://github.com/TheBrainFamily/cypress-cucumber-preprocessor)
+8. (OPTIONAL) Install and Setup Cucumber plugin _(see below)_
 
 ## Setup Cucumber
 
@@ -58,7 +58,7 @@ Add support for feature files to your Cypress configuration
 }
 ```
 
-To run bundled tests:
+To run bundled tests _(apply on script cy:run)_:
 
 ```
 cypress run --spec **/*.features
@@ -129,6 +129,15 @@ Add the following in the `js` file to have a an intellisense
 
 ```js
 /// <reference types="Cypress" />
+```
+
+If you want it to be `Global`, create the file in root
+**jsconfig.json**
+
+```json
+{
+    "include": ["./node_modules/cypress", "cypress/**/*.js"]
+}
 ```
 
 ## See more
