@@ -140,7 +140,47 @@ If you want it to be `Global`, create the file in root
 }
 ```
 
-## See more
+### Given When Then + ( And / But )
+
+#### Given
+
+-   Precondition
+-   are steps to put the system in a known state
+-   For several Given, use "And" or "But" for the number 2 and upwards to make it more readable
+
+#### When
+
+-   User actions or events from another system
+-   strongly recommended to only have a single "When" in a scenario
+
+#### Then
+
+-   are steps used to describe an expected outcome, or result.
+-   For several Then, use "And" or "But" for the number 2 and upwards to make it more readable
+
+```gherkin
+Scenario: All done
+  Given I am out shopping
+  And I have eggs
+  And I have milk
+  And I have butter
+  When I check my list
+  Then I don't need anything
+
+
+Scenario: All done
+  Given I am out shopping
+  * I have eggs
+  * I have milk
+  * I have butter
+  When I check my list
+  Then I don't need anything
+```
+
+Source: https://cucumber.io/docs/gherkin/reference/
+
+## References
 
 -   https://github.com/TheBrainFamily/cypress-cucumber-preprocessor
 -   https://docs.cucumber.io/cucumber/cucumber-expressions/
+-   https://cucumber.io/docs/gherkin/reference/

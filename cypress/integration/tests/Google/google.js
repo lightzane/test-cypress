@@ -36,7 +36,13 @@ When('I want to search {string} via rest-api testing', (pokemon) => {
     cy.request(
         'GET',
         `https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`
-    ).then((response) => {
+    ).as('myrequest'); // set alias and call in another section
+});
+
+// This step definition allows to use response or result as the last word
+Then('I should see {string} in the response/result', (pokemon) => {
+    // calling alias from another section
+    cy.get('@myrequest').then((response) => {
         expect(response.status).eq(200);
         expect(response.body.name).eq(pokemon.toLowerCase());
 
