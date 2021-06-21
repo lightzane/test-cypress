@@ -14,8 +14,11 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@cypress/browserify-preprocessor": "^3.0.1",
         "cypress": "^7.5.0",
-        "cypress-cucumber-preprocessor": "^4.1.2"
+        "cypress-cucumber-preprocessor": "^4.1.2",
+        "tsify": "^5.0.4",
+        "typescript": "^4.3.4"
     },
     "cypress-cucumber-preprocessor": {
         "nonGlobalStepDefinitions": true

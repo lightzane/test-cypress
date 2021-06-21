@@ -1,5 +1,11 @@
 # Test my App
 
+<p>
+  <img src="https://img.shields.io/badge/-cypress-lightblue"/>
+  <img src="https://img.shields.io/badge/-cucumber-green"/>
+  <img src="https://img.shields.io/badge/-typescript-blue"/>
+</p>
+
 Using Cypress with Cucumber (plugin)
 
 ```
@@ -29,6 +35,8 @@ npm install -D cypress
 6. `npm run cy:verify`
 7. There should be verified cypress.exe
 8. (OPTIONAL) Install and Setup Cucumber plugin _(see below)_
+9. (OPTIONAL) [Use Cypress with Typescript](#cypress-with-typescript)
+10. (OPTIONAL) [Use Cypress+Cucumber with Typescript](#use-cypress-and-cucumber-with-typescript)
 
 ## Setup Cucumber
 
@@ -123,8 +131,9 @@ Then(`I see {string} in the title`, (title) => {
 });
 ```
 
-### Typescript definitions
+## Reference Type definitions (use this if NOT using Typescript)
 
+**SKIP THIS STEP IF USING TYPESCRIPT**<br>
 Add the following in the `js` file to have a an intellisense
 
 ```js
@@ -138,6 +147,48 @@ If you want it to be `Global`, create the file in root
 {
     "include": ["./node_modules/cypress", "cypress/**/*.js"]
 }
+```
+
+## Cypress with Typescript
+
+```
+npm i -D typescript
+```
+
+**tsconfig.json**
+
+```json
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["es6", "dom"],
+        "types": ["cypress"],
+        "moduleResolution": "Node"
+    },
+    "include": ["**/*.ts"]
+}
+```
+
+## Use Cypress and Cucumber with Typescript
+
+```
+npm i -D tsify @cypress/browserify-preprocessor
+```
+
+**cypress/plugins/index.js**
+
+```js
+const cucumber = require('cypress-cucumber-preprocessor').default;
+const browserify = require('@cypress/browserify-preprocessor');
+
+module.exports = (on, config) => {
+    const options = browserify.defaultOptions;
+    options.browserifyOptions.plugin.unshift(['tsify']);
+    // Or, if you need a custom tsconfig.json for your test files:
+    // options.browserifyOptions.plugin.unshift(['tsify', {project: 'path/to/other/tsconfig.json'}]);
+
+    on('file:preprocessor', cucumber(options));
+};
 ```
 
 ### Given When Then + ( And / But )

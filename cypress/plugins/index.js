@@ -13,6 +13,7 @@
 // the project's config changing)
 
 const cucumber = require('cypress-cucumber-preprocessor').default;
+const browserify = require('@cypress/browserify-preprocessor');
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -20,5 +21,14 @@ const cucumber = require('cypress-cucumber-preprocessor').default;
 module.exports = (on, config) => {
     // `on` is used to hook into various events Cypress emits
     // `config` is the resolved Cypress config
-    on('file:preprocessor', cucumber());
+
+    // to enable typescript with cucumber
+    // since `feature` files are looking for .js by default
+    // config the ff below:
+    const options = browserify.defaultOptions;
+    options.browserifyOptions.plugin.unshift(['tsify']);
+    // Or, if you need a custom tsconfig.json for your test files:
+    // options.browserifyOptions.plugin.unshift(['tsify', {project: 'path/to/other/tsconfig.json'}]);
+
+    on('file:preprocessor', cucumber(options));
 };
