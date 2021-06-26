@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/-typescript-blue"/>
 </p>
 
-Using Cypress with Cucumber (plugin)
+Using Cypress Typescript with Cucumber (plugin)
 
 ```
 npm install -D cypress
