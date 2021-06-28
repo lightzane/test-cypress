@@ -29,7 +29,7 @@ When(`I type {string} in the textfield`, (keyword: string) => {
         });
     cy.get('@searchField').type('{enter}');
     cy.get('.GmE3X').as('labelImageResult'); // the DOM element has now an alias of 'labelImageResult'
-    cy.get('@labelImageResult').should('have.text', `Images for ${keyword}`);
+    cy.get('@labelImageResult').should('contain.text', `Images for ${keyword}`);
 });
 
 // Suddenly a pokemon appeared !
