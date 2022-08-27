@@ -45,13 +45,45 @@ npm i -D typescript
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es6",
-        "lib": ["es6", "dom"],
-        "types": ["cypress"],
-        "moduleResolution": "Node"
-    },
-    "include": ["**/*.ts"]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"]
+  },
+  "include": ["**/*.ts"]
+}
+```
+
+And say you are using **Custom Commands** with Cypress like for example:
+
+**cypress/support/command.ts**
+
+```ts
+Cypress.Commands.add('anything', () => {
+    cy.visit('https://example.cypress.io');
+});
+
+Cypress.Commands.add('dataCy', (value) => {
+  return cy.get(`[data-cy=${value}]`)
+})
+```
+
+We have to update the following
+
+**cypress/support/index.ts**
+
+```ts
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            anything(): Chainable<Element>;
+            /**
+             * Custom command to select DOM element by data-cy attribute.
+             * @example cy.dataCy('greeting')
+             */
+            dataCy(value: string): Chainable<Element>
+        }
+    }
 }
 ```
 
@@ -59,6 +91,7 @@ npm i -D typescript
 
 ```json
 {
-    "testFiles": ["**/*.ts"]
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "ignoreTestFiles": "**/z-ignore/**"
 }
 ```
