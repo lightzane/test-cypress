@@ -8,7 +8,7 @@
 Using Cypress Typescript
 
 ```
-npm install -D cypress
+npm install -D cypress@9.2.0 --save-exact
 ```
 
 **package.json**
@@ -95,3 +95,22 @@ declare global {
   "ignoreTestFiles": "**/z-ignore/**"
 }
 ```
+
+## Install Cypress Binary Later
+
+When installing Cypress, 2 things are happening:
+
+- Cypress node_modules is installed
+- Cypress Binary / Application is installed
+
+If you only want to install just the node_modules, create `.npmrc` in root directory
+
+**.npmrc**
+
+```
+CYPRESS_INSTALL_BINARY=0
+```
+
+You can also force Cypress to skip the installation of the binary application by setting `CYPRESS_INSTALL_BINARY=0`. This could be useful if you want to prevent Cypress from downloading the Cypress binary at the time of `npm install`.
+
+Reference: https://docs.cypress.io/guides/references/advanced-installation#Skipping-installation
