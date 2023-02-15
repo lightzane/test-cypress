@@ -7,6 +7,8 @@
 
 Using Cypress Typescript
 
+If skipping installation of binary (cypress.exe), do this step first: [Install Cypress Binary Later](#install-cypress-binary-later)
+
 ```
 npm install -D cypress@9.2.0 --save-exact
 ```
