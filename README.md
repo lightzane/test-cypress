@@ -68,6 +68,20 @@ Cypress.Commands.add('anything', () => {
 Cypress.Commands.add('dataCy', (value) => {
   return cy.get(`[data-cy=${value}]`)
 })
+
+const LOCAL_STORAGE_MEMORY = {};
+
+Cypress.Commands.add('saveAllLocalStorage', () => {
+  Object.keys(localStorage).forEach((key) => {
+    LOCAL_STORAGE_MEMORY[key] = localStorage[key];
+  });
+});
+
+Cypress.Commands.add('restoreLocalStorage', () => {
+  Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
+    localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
+  });
+});
 ```
 
 We have to update the following
@@ -75,6 +89,10 @@ We have to update the following
 **cypress/support/index.ts**
 
 ```ts
+// ! ERROR: Augmentations for the global scope can only be directly nested in external modules or ambient module declarations.ts(2669)
+// * IF any error is encountered (such as the one mentioned above) then include this code below:
+// export {};
+
 declare global {
     namespace Cypress {
         interface Chainable {
@@ -84,6 +102,9 @@ declare global {
              * @example cy.dataCy('greeting')
              */
             dataCy(value: string): Chainable<Element>
+
+            saveAllLocalStorage(): Chainable<Element>;
+            restoreLocalStorage(): Chainable<Element>;
         }
     }
 }
