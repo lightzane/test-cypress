@@ -98,6 +98,24 @@ declare global {
 }
 ```
 
+**cypress.config.js**
+
+(For Cypress version `> 9`) - **cypress.json** would be replaced.
+
+```js
+const { defineConfig } = require('cypress');
+
+/** @type {import('cypress').defineConfig} */
+module.exports = defineConfig({
+  e2e: {
+    excludeSpecPattern: ['**/z-ignore/**'],
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+  },
+});
+```
+
 ## Install Cypress Binary Later
 
 When installing Cypress, 2 things are happening:
